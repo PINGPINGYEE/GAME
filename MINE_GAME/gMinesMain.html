@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>지뢰 찾기</title>
+  <style>
+    html {
+      cursor: none; /* 텍스트 커서 숨김 */
+    }
+
+    /* 마우스 커서 표시 */
+    body {
+      cursor: auto !important; /* 마우스 커서를 기본 값으로 설정 */
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    
+    /* 게임 보드 스타일링 */
+    
+    /* 게임 보드*/
+    .game-board {
+      width: 500px;
+      height: 500px;
+      border: 1px solid #ccc;
+      display: grid;
+      grid-template-columns: repeat(10, 1fr); /* 가로 칸 수에 따라 조정 */
+      grid-template-rows: repeat(10, 1fr); /* 세로 칸 수에 따라 조정 */
+    }
+
+    /* 셀*/
+    .cell {
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* 숨기기*/
+    .hidden {
+        background-color: #999;
+    }
+
+    /* 지뢰*/
+    .mine {
+        background-color: #000;
+        color: #ffffff;
+    }
+
+    /* 보이기*/
+    .revealed {
+        background-color: #ddd;
+        cursor: default;
+    }
+
+    .toggle-button {
+      cursor: pointer;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    .toggle-content {
+      display: none;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+    .toggle-content.show {
+      display: block;
+    }
+    
+    
+    /* 나머지 스타일 정의... */
+  </style>
+</head>
+<body>
+
+  <button id="description-button" class="toggle-button">게임 설명</button>
+  <div id="description-content" class="toggle-content">
+    방향키로 조작합니다.<br><br>
+    처음 상태는 일반 모드입니다.<br>
+    일반 모드일 때는 지뢰가 없는 곳만 밟아야 합니다.<br>
+    지뢰를 밟으면 게임 오버됩니다.<br><br>
+    B를 누르게 되면 체크 모드로 바뀝니다.<br>
+    체크 모드인 상태에서는 지뢰가 있는 곳만 밟아야 합니다.<br>
+    지뢰가 없는 곳을 밟으면 게임 오버됩니다.<br><br>
+    B를 다시 누르게 되면 일반 모드로 돌아갑니다.<br><br>
+    플레이 상황에 따라 라이트 모드와 다크 모드를 선택하면 됩니다.<br>
+    아래에 모드 표시와 시간이 나와있으니 스크롤을 최대한 아래로 내려주세요.<br>
+    version-- 1.3<br>
+    made by me<br>
+  </div>
+
+  <button id="light-mode">Light Mode</button>
+  <button id="dark-mode">Dark Mode</button>
+  <div>
+    <button id="easy-mode">Easy Mode</button>
+    <button id="intermediate-mode">Intermediate Mode</button>
+    <button id="hard-mode">Hard Mode</button>
+    <button id="expert-mode">Expert Mode</button>
+  </div>
+  
+
+  <h2>지뢰 찾기</h2>
+
+  <button id="restart">Restart</button>
+
+
+  <div class="game-board"></div>
+  <div class="message"></div>
+
+  
+  <p class="timer">Elapsed time: 0 seconds</p>
+
+  
+  <script>
+
+    function toggleGameDescription() {
+      const gameDescription = document.querySelector('.game-description');
+      gameDescription.classList.toggle('active');
+    }
+
+    
+  </script>
+  <script>
+    // 방향키 입력 이벤트 처리
+    document.addEventListener('keydown', function(event) {
+      // 방향키인 경우에만 텍스트 커서 동작을 막음
+      if (event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+      }
+    });
+  </script>
+  <script src="game.js"></script>
+</body>
+</html>
